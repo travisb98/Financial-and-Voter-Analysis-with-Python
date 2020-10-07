@@ -7,16 +7,15 @@ try:
     #the filenotfound error actually came up later in the code, but I added this open(csvpath) here to check for the error early, I'm thinking this might
     #....bad bacause it's repetitive
     open(csvpath)
-    close(csvpath)
 except FileNotFoundError:
     print("-----------------------------------------------------")
     print("-----------------------------------------------------")
     print("encountered FileNotFoundError, assesing directory")
     print("-----------------------------------------------------")
     print("-----------------------------------------------------")
-    csvpath = os.path.join("PYBANK","Resources","budget_data.csv")
+    csvpath = os.path.join("PyBank","Resources","budget_data.csv")
 
-#open 
+#open the CSV file
 with open(csvpath) as budgetfile:
     filereader = csv.reader(budgetfile,delimiter=",")
 
@@ -78,14 +77,13 @@ try:
     #
     #
     open(resultspath)
-    close(resultspath)
 except FileNotFoundError:
     print("-----------------------------------------------------")
     print("-----------------------------------------------------")
     print("encountered FileNotFoundError, assesing directory")
     print("-----------------------------------------------------")
     print("-----------------------------------------------------")
-    resultspath = os.path.join("PYBANK","analysis","PYBANK_results.txt")
+    resultspath = os.path.join("PyBank","analysis","PYBANK_results.txt")
 
 with open(resultspath,'w') as resultsfile:
     final(resultsfile.write)
