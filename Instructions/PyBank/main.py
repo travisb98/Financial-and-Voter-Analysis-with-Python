@@ -7,6 +7,7 @@ try:
     #the filenotfound error actually came up later in the code, but I added this open(csvpath) here to check for the error early, I'm thinking this might
     #....bad bacause it's repetitive
     open(csvpath)
+    close(csvpath)
 except FileNotFoundError:
     print("-----------------------------------------------------")
     print("-----------------------------------------------------")
@@ -57,27 +58,21 @@ with open(csvpath) as budgetfile:
         
     averagechange = round(totalchange/(months-1),2)
 
+#defines the final results as a function so they can be printed to the terminal and the text document
+def final(x):
+    x("")
+    x("Financial Analysis")
+    x("-------------------")
+    x("Total Months: "+str(months))
+    x("Total Profit: $"+str(totalprofit))
+    x("Average Change:$"+str(averagechange))
+    x("Greatest Increase: "+winnermonth+"($"+str(gincrease)+")")
+    x("Greatest Decrease: "+losermonth+"($"+str(gdecrease)+")")
 
-def final();
-    print("")
-    print("Financial Analysis")
-    print("-------------------")
-    print("Total Months: "+str(months))
-    print("Total Profit: $"+str(totalprofit))
-    print("Average Change:$"+str(averagechange))
-    print("Greatest Increase: "+winnermonth+"($"+str(gincrease)+")")
-    print("Greatest Decrease: "+losermonth+"($"+str(gdecrease)+")")
+#prints the results to the terminal
+final(print)
 
-final():
-
-
-
-
-
-
-
-
-#opening the results textfile and writing filler text
+#opening the results textfile and the results. !!!!formatting within the text document is currently garbage!!!!!
 try:
     resultspath = os.path.join("analysis","PYBANK_results.txt")
     #
@@ -93,4 +88,4 @@ except FileNotFoundError:
     resultspath = os.path.join("PYBANK","analysis","PYBANK_results.txt")
 
 with open(resultspath,'w') as resultsfile:
-    resultsfile.write("this is test text")
+    final(resultsfile.write)
