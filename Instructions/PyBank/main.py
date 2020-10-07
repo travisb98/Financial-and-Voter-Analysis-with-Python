@@ -8,19 +8,28 @@ with open(csvpath) as budgetfile:
 
     #skips the header
     next(filereader)
-    #calculates the total profit
+    
     totalprofit = 0
+    months = 0
+    totalchange = 0
     for row in filereader:
-        if row[0] !="":
-            totalprofit = totalprofit + int(row[1])
-            
-        else:
-            pass
+        #calculates the total profit
+        totalprofit = totalprofit + int(row[1])      
+        #finds the total number of rows which will be used to determine the number of months
+        months += 1
+        #testing out previous rows, trying to calculate average change
+        currentprofit = 0
+        nextmonthsprofit = 0
+        currentprofit = row[1]
+        nextmonthsprofit = # i need to be able to reference the vaule in column 2 for the next row
 
-def final():
-    print("Financial Analysis")
-    print("------------------")
-    print("Total Months:"+ "input")
-    print("Total Profit:" + str(totalprofit))
 
-final()
+#filler for now so the values I get are printed to the terminal
+#     print("")
+#     print("Financial Analysis")
+#     print("-------------------")
+#     print("Total Months: "+str(months))
+#     print("Total Profit: $"+str(totalprofit))
+#     print("totalchange????"+str(totalchange))
+    
+
