@@ -15,12 +15,12 @@ except FileNotFoundError:
     print("-----------------------------------------------------")
     csvpath = os.path.join("PyPoll","Resources","election_data.csv")
 
-#setting up variables
+#setting up variables, dictionaries etc
 votescast = 0
-khantotal = 0
-correytotal = 0
-litotal = 0
-tooleytotal= 0
+
+votedict ={"Khan":0,"Correy":0,"Li":0,"O'Tooley":0}
+
+
 #open the CSV file
 with open(csvpath) as pollfile:
     filereader = csv.reader(pollfile,delimiter=",")
@@ -28,7 +28,14 @@ with open(csvpath) as pollfile:
     for row in filereader:
         #sums up the total number of votes cast
         votescast+=1
-        if row[2]
+        #reads through the votedict dictionay to see if the current row matches a key in the dictionary and increases the value by 1 if it matches
+        #this currently doesn't work
+        for name in votedict:
+            #if votedict[name] == row[2]:
+            #    print("its working???")
+
+print(votedict)
+
 
 
 
