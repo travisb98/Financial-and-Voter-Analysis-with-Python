@@ -58,11 +58,15 @@ percentagesdict = dict.fromkeys(uniquecandidatelist,0.00)
 for candidate in percentagesdict:
     percentagesdict[candidate]="{:.3%}".format(votedict[candidate]/votescast)
 
+# # i need this code explained to me, it returs a tuple instead of the voter's name
+# winner = max([(value,key) for key, value in votedict.items()])
+# winner = winner[1]
 
-winner = min(votedict)
+winner = max(votedict,key=lambda key:votedict[key])
+
 
 print (percentagesdict)
-print ("Winner: "+ winner)
+print ("Winner: "+ str(winner))
 
 #print (votedict)
 # print(candidatelist)
@@ -77,8 +81,6 @@ print ("Winner: "+ winner)
     #         votetally=votedict[name]
     #         votetally=votetally + 1
     #         votedict[name]=votetally
-
-    
 
     # ####testing this one prints out each value in the  dictionary
     # for name in votedict:
