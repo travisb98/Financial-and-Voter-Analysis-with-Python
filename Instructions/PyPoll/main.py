@@ -58,53 +58,38 @@ percentagesdict = dict.fromkeys(uniquecandidatelist,0.00)
 for candidate in percentagesdict:
     percentagesdict[candidate]="{:.3%}".format(votedict[candidate]/votescast)
 
-# # i need this code explained to me, it returs a tuple instead of the voter's name
-# winner = max([(value,key) for key, value in votedict.items()])
-# winner = winner[1]
 
 winner = max(votedict,key=lambda key:votedict[key])
 
-
-print (percentagesdict)
+#printing the final results to terminal, prints in random order since I'm referencing dictionaries
+print("Election Results")
+print("-----------------------")
+print("Total Votes: "+ str(votescast))
+print("-----------------------")
+for candidate in uniquecandidatelist:
+    print(candidate+": " + str(percentagesdict[candidate])+" ("+str(votedict[candidate])+")")
+print("-----------------------")
 print ("Winner: "+ str(winner))
+print("-----------------------")
 
-#print (votedict)
-# print(candidatelist)
-# print(votescast)
-# print(votedict)
+try:
+    resultspath = os.path.join("analysis","PYPOLL_results.txt")
+    open(resultspath,'w+')
+except FileNotFoundError:
+        errormsg
+        resultspath = os.path.join("PyPoll","analysis","PYPOLL_results.txt")
+        open(resultspath,'w+')
 
-  
-    # ###this just loops through the dictionary and adds 1 to the value if the name is khan
-    # for name in votedict:
-    #     derpy = 'Khan'
-    #     if name == derpy:
-    #         votetally=votedict[name]
-    #         votetally=votetally + 1
-    #         votedict[name]=votetally
 
-    # ####testing this one prints out each value in the  dictionary
-    # for name in votedict:
-    #     print(votedict[name])
-    
-    # #testing  prints out->   dict_keys(['Candidate', 'Khan', 'Correy', 'Li', "O'Tooley"])
-    # print(votedict.keys()) 
 
-    # ####testing this one prints out each value in the dictionary
-    # for name in votedict.values():
-    #     print(name)
-
-    # ### testing this one prints out each key in the dictionary individually
-    # for name in votedict:
-    #     print (name)
-
-    # ###testing prints out each value individaually
-    # for votetally in votedict:
-    #     print(votedict[votetally])
-
-    # ###this just loops through the dictionary and adds 1 to the value if the name is khan
-    # derpy = "Khan"
-    # for name in votedict:
-    #     if name == derpy:
-    #         votetally=votedict[name]
-    #         votetally=votetally + 1
-    #         votedict[name]=votetally
+with open(resultspath,'w+') as resultsfile:
+    write=resultsfile.write
+    write("Election Results\n")
+    write("-----------------------\n")
+    write("Total Votes: "+ str(votescast)+"\n")
+    write("-----------------------\n")
+    for candidate in uniquecandidatelist:
+        write(candidate+": " + str(percentagesdict[candidate])+" ("+str(votedict[candidate])+")\n")
+    write("-----------------------\n")
+    write ("Winner: "+ str(winner)+"\n")
+    write("-----------------------\n")
