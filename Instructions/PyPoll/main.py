@@ -80,8 +80,6 @@ except FileNotFoundError:
         resultspath = os.path.join("PyPoll","analysis","PYPOLL_results.txt")
         open(resultspath,'w+')
 
-
-
 with open(resultspath,'w+') as resultsfile:
     write=resultsfile.write
     write("Election Results\n")
