@@ -1,42 +1,108 @@
 import os
 import csv
 
-#testing out using try blocks to deal with error handling regarding directory names, i should iterate this to check for each file within the project's structure.
-try:
-    csvpath = os.path.join("Resources","election_data.csv")
-    #the filenotfound error actually came up later in the code, but I added this open(csvpath) here to check for the error early, I'm thinking this might
-    #....bad bacause it's repetitive
-    open(csvpath)
-except FileNotFoundError:
+###error message for directory error
+def errormsg():
     print("-----------------------------------------------------")
     print("-----------------------------------------------------")
     print("encountered FileNotFoundError, assesing directory")
     print("-----------------------------------------------------")
     print("-----------------------------------------------------")
+
+#testing out using try blocks to deal with error handling regarding directory names, i should iterate this to check for each file within the project's structure.
+try:
+    csvpath = os.path.join("Resources","election_data.csv")
+    open(csvpath)
+except FileNotFoundError:
+    errormsg
     csvpath = os.path.join("PyPoll","Resources","election_data.csv")
 
 #setting up variables, dictionaries etc
 votescast = 0
-
-votedict ={"Khan":0,"Correy":0,"Li":0,"O'Tooley":0}
+votedict={}
+percentagesdict={}
+candidatelist =[]
+uniquecandidatelist = []
 
 
 #open the CSV file
 with open(csvpath) as pollfile:
     filereader = csv.reader(pollfile,delimiter=",")
 
+    next(filereader)
+
     for row in filereader:
         #sums up the total number of votes cast
         votescast+=1
-        #reads through the votedict dictionay to see if the current row matches a key in the dictionary and increases the value by 1 if it matches
-        #this currently doesn't work
-        for name in votedict:
-            #if votedict[name] == row[2]:
-            #    print("its working???")
+        #adds name to candidatelist
+        candidatelist.append(row[2])
 
-print(votedict)
-
-
+    #simplifies candidate list so all entries are unique
+    uniquecandidatelist = list(set(candidatelist))
+    #creates a dictionary out of the candidate list to track the votes
+    votedict = dict.fromkeys(uniquecandidatelist,0)
 
 
-print(votescast)
+#loops through each unique vote in the candidate list and tallys the vote for each candidate's value in the dictionary
+for eachvote in candidatelist:
+    for name in votedict:
+        if name == eachvote:
+            votetally=votedict[name]
+            votetally=votetally + 1
+            votedict[name]=votetally
+        else:
+            pass
+percentagesdict = dict.fromkeys(uniquecandidatelist,0.00)
+
+#calculates each value in the percentagesdict as a percentage of total votes cast   
+for candidate in percentagesdict:
+    percentagesdict[candidate]="{:.3%}".format(votedict[candidate]/votescast)
+
+
+winner = min(votedict)
+
+print (percentagesdict)
+print ("Winner: "+ winner)
+
+#print (votedict)
+# print(candidatelist)
+# print(votescast)
+# print(votedict)
+
+  
+    # ###this just loops through the dictionary and adds 1 to the value if the name is khan
+    # for name in votedict:
+    #     derpy = 'Khan'
+    #     if name == derpy:
+    #         votetally=votedict[name]
+    #         votetally=votetally + 1
+    #         votedict[name]=votetally
+
+    
+
+    # ####testing this one prints out each value in the  dictionary
+    # for name in votedict:
+    #     print(votedict[name])
+    
+    # #testing  prints out->   dict_keys(['Candidate', 'Khan', 'Correy', 'Li', "O'Tooley"])
+    # print(votedict.keys()) 
+
+    # ####testing this one prints out each value in the dictionary
+    # for name in votedict.values():
+    #     print(name)
+
+    # ### testing this one prints out each key in the dictionary individually
+    # for name in votedict:
+    #     print (name)
+
+    # ###testing prints out each value individaually
+    # for votetally in votedict:
+    #     print(votedict[votetally])
+
+    # ###this just loops through the dictionary and adds 1 to the value if the name is khan
+    # derpy = "Khan"
+    # for name in votedict:
+    #     if name == derpy:
+    #         votetally=votedict[name]
+    #         votetally=votetally + 1
+    #         votedict[name]=votetally
