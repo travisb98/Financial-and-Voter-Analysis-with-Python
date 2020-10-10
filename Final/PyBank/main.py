@@ -37,7 +37,7 @@ except FileNotFoundError:
         open(csvpath)
     except FileNotFoundError:
         errormsg
-        csvpath = os.path.join("Instructions","PyBank","Resources","budget_data.csv")
+        csvpath = os.path.join("Final","PyBank","Resources","budget_data.csv")
 
 #open the CSV file
 with open(csvpath) as budgetfile:
@@ -82,7 +82,7 @@ except FileNotFoundError:
         open(resultspath,'w+')
     except FileNotFoundError:
         errormsg
-        resultspath = os.path.join("Instructions","PyBank","analysis","PYBANK_results.txt")
+        resultspath = os.path.join("Final","PyBank","analysis","PYBANK_results.txt")
         open(resultspath,'w+')
 #creates PYBANK_results file an writes the final results to the file
 with open(resultspath,'w+') as resultsfile:
