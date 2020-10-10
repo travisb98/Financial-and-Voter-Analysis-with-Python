@@ -85,7 +85,7 @@ newdob_list =[]
 newssn_list=[]
 newstate_list=[]
 
-csvpath = os.path.join(".","employee_data.csv")
+csvpath = os.path.join("PyBoss","employee_data.csv")
 
 #open the CSV file
 with open(csvpath,'r') as empfile:
@@ -140,7 +140,7 @@ finalrows_list=zip(
     newstate_list,
 )
 
-outputpath = os.path.join(".","output_emp_data.csv")
+outputpath = os.path.join("PyBoss","output_emp_data.csv")
 
 #open the CSV file
 with open(outputpath,'w+',newline='') as newempfile:
